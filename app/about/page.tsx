@@ -81,7 +81,7 @@ export default function AboutPage() {
         </div>
         <div style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'flex', flexDirection: 'column' }}>
           {timeline.map((item) => (
-            <div key={item.year} style={{ display: 'grid', gridTemplateColumns: '150px 1fr', gap: 32, padding: '26px 0', borderTop: '1px solid var(--border-2)' }}>
+            <div key={item.year} className="rc-timeline" style={{ display: 'grid', gridTemplateColumns: '150px 1fr', gap: 32, padding: '26px 0', borderTop: '1px solid var(--border-2)' }}>
               <div style={{ fontFamily: 'Anton, sans-serif', fontSize: 34, color: 'var(--accent)' }}>{item.year}</div>
               <p style={{ fontSize: 18, lineHeight: 1.6, color: 'var(--muted)', fontWeight: 300, alignSelf: 'center' }}>{item.text}</p>
             </div>

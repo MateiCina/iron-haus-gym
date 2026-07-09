@@ -47,7 +47,7 @@ export default function SchedulePage() {
             Why it works
           </div>
         </div>
-        <div style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 20 }}>
+        <div className="rc-2card" style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 20 }}>
           <div className="zone-card">
             <h3 className="zone-title">{scheduleIntro.title}</h3>
             <p className="zone-copy">{scheduleIntro.description}</p>

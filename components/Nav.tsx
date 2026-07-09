@@ -9,11 +9,25 @@ import Logo from './Logo'
 export default function Nav() {
   const pathname = usePathname()
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const current = (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark'
     setTheme(current)
   }, [])
+
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [pathname])
+
+  // Prevent the page from scrolling behind an open mobile menu.
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark'
@@ -32,19 +46,24 @@ export default function Nav() {
       <Link href="/" className="nav-brand">
         <Logo />
       </Link>
-      <div className="nav-links">
-        {navLinks.map((link) => {
-          const active = pathname === link.href
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={active ? 'nav-link nav-link-active' : 'nav-link'}
-            >
-              {link.label}
-            </Link>
-          )
-        })}
+      <div id="nav-menu" className={menuOpen ? 'nav-menu nav-menu-open' : 'nav-menu'}>
+        <div className="nav-links">
+          {navLinks.map((link) => {
+            const active = pathname === link.href
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={active ? 'nav-link nav-link-active' : 'nav-link'}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
+        </div>
+        <Link href="/pricing" className="button button-primary nav-menu-cta">
+          Join Now
+        </Link>
       </div>
       <div className="nav-actions">
         <button
@@ -64,9 +83,21 @@ export default function Nav() {
             </svg>
           )}
         </button>
-        <Link href="/pricing" className="button button-primary">
+        <Link href="/pricing" className="button button-primary nav-join-desktop">
           Join Now
         </Link>
+        <button
+          type="button"
+          className={menuOpen ? 'nav-toggle nav-toggle-open' : 'nav-toggle'}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          aria-controls="nav-menu"
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </div>
     </nav>
   )

@@ -149,9 +149,10 @@ main {
 /* Cookie consent banner */
 .cookie-consent {
   position: fixed;
-  left: 50%;
+  left: 0;
+  right: 0;
   bottom: 20px;
-  transform: translateX(-50%);
+  margin: 0 auto;
   z-index: 90;
   width: min(680px, calc(100% - 32px));
   display: flex;
@@ -265,6 +266,59 @@ img {
   display: flex;
   align-items: center;
   gap: 14px;
+}
+
+/* The middle group holding the primary links. On desktop it flows inline;
+   on mobile it becomes a drop-down panel (see the mobile media queries). */
+.nav-menu {
+  display: flex;
+  align-items: center;
+}
+
+/* The in-menu "Join Now" and the hamburger only appear on mobile. */
+.nav-toggle {
+  display: none;
+}
+
+/* Needs higher specificity than the shared `.button` rule, otherwise
+   `.button { display: inline-flex }` wins on source order and the in-menu
+   Join Now shows up alongside the desktop one. */
+.site-nav .nav-menu-cta {
+  display: none;
+}
+
+/* Hamburger button */
+.nav-toggle {
+  width: 42px;
+  height: 42px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: transparent;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.nav-toggle-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .theme-toggle,
@@ -1458,14 +1512,80 @@ img {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  /* Inline-styled 3-up card grids step down to 2 columns.
+     (!important is required to beat the element's inline style.) */
+  .rc-3col {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
 }
 
 @media (max-width: 840px) {
+  /* ---- Nav switches to a hamburger drop-down ---- */
   .site-nav {
-    flex-wrap: wrap;
-    justify-content: center;
+    padding: 12px max(20px, (100% - var(--container)) / 2);
   }
 
+  .nav-join-desktop {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* The links group drops down as a full-width panel under the bar. */
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 14px 20px 22px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    /* Collapsed by default; expands when open. */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: max-height 0.3s ease, opacity 0.2s ease, transform 0.25s ease;
+  }
+
+  .nav-menu-open {
+    max-height: calc(100vh - 66px);
+    overflow-y: auto;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    width: 100%;
+    font-size: 17px;
+    letter-spacing: 2px;
+  }
+
+  .nav-link {
+    padding: 14px 6px;
+    border-bottom: 1px solid var(--border-faint);
+  }
+
+  .site-nav .nav-menu-cta {
+    display: inline-flex;
+    margin-top: 14px;
+    width: 100%;
+  }
+
+  /* ---- Layout collapses to a single column ---- */
   .about-grid,
   .area-grid,
   .footer-grid,
@@ -1477,20 +1597,213 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .hero {
-    padding: 88px 24px;
+  .equipment-grid {
+    grid-auto-rows: 220px;
   }
 
-  .nav-links,
-  .nav-actions {
-    justify-content: center;
+  /* The mosaic's wide cards carry an inline `grid-column: span 2`; override
+     it (inline needs !important) so they don't spawn an implicit 2nd column. */
+  .equipment-card.big {
+    grid-column: auto !important;
   }
 
   .contact-row {
     grid-template-columns: 1fr;
   }
 
+  /* Inline-styled two-column splits (content + map/form) stack. */
+  .rc-2col,
+  .rc-trainer-split {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero {
+    padding: 88px 24px;
+  }
+
   .hero-title {
     font-size: clamp(42px, 12vw, 88px);
+  }
+}
+
+/* ---- Phones: tighten spacing, scale hero and cards ---- */
+@media (max-width: 620px) {
+  :root {
+    --gutter: 20px;
+  }
+
+  .section {
+    padding: 64px 20px;
+  }
+
+  .site-footer {
+    padding: 48px 20px 60px;
+  }
+
+  .grid-3,
+  .grid-2,
+  .grid-6,
+  .services-grid,
+  .training-grid,
+  .timeline-grid,
+  .stats-grid,
+  .testimonials-grid,
+  .pricing-grid,
+  .rc-3col,
+  .rc-2card,
+  .rc-timeline {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card,
+  .card-alt,
+  .card-surface,
+  .service-card,
+  .trainer-card,
+  .equipment-card,
+  .pricing-card,
+  .schedule-card,
+  .class-card,
+  .value-card,
+  .zone-card,
+  .faq-card,
+  .info-card,
+  .testimonial-card {
+    padding: 24px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 120px 20px 72px;
+  }
+
+  .hero-copy p {
+    font-size: 17px;
+    margin-top: 20px;
+  }
+
+  .hero-actions {
+    margin-top: 30px;
+  }
+
+  .hero-actions .button {
+    flex: 1 1 auto;
+  }
+
+  /* Stats wrap to two columns with a calmer gap. */
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 32px;
+    width: 100%;
+    margin-top: 36px;
+  }
+
+  .hero-stat-number {
+    font-size: 34px;
+  }
+
+  .about-grid {
+    gap: 40px;
+  }
+
+  /* Keep the floating badge inside the viewport. */
+  .about-badge {
+    left: 16px;
+    bottom: -18px;
+    padding: 16px 20px;
+  }
+
+  .about-badge h3 {
+    font-size: 30px;
+  }
+
+  .day-pass {
+    padding: 24px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .trainer-card {
+    flex: 0 0 82%;
+  }
+
+  .trainer-card-image {
+    min-height: 300px;
+  }
+
+  /* ---- Coach cards: compact horizontal layout instead of a tall stack ----
+     Image is a flush-left thumbnail that stretches to the text height, and
+     the card's own padding is removed so the text gets the full width it
+     needs (otherwise it wraps into many lines and the card stays tall). */
+  .rc-trainer-split {
+    grid-template-columns: 104px 1fr !important;
+    align-items: stretch;
+    padding: 0 !important;
+  }
+
+  .trainer-split-media {
+    min-height: 0 !important;
+  }
+
+  .trainer-split-media .trainer-initials {
+    font-size: 40px;
+  }
+
+  .trainer-split-body {
+    padding: 18px !important;
+  }
+
+  .trainer-split-body .trainer-copy {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .trainer-split-body .trainer-tags {
+    margin-top: 12px !important;
+  }
+
+  /* The name <h3> reuses `.trainer-card-body` (which carries 26px padding),
+     which pushes it in and down; strip it so it sits under the role. */
+  .trainer-split-body > h3 {
+    padding: 0 !important;
+  }
+
+  /* ---- Equipment: uniform one-per-row gallery tiles ---- */
+  .equipment-grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto;
+    gap: 14px;
+  }
+
+  .equipment-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  .section-cta .cta-actions .button,
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .map-card {
+    min-height: 360px;
+  }
+}
+
+/* ---- Schedule turns into a swipeable carousel on phones ---- */
+@media (max-width: 620px) {
+  .schedule-grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 20px;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .schedule-card {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
   }
 }

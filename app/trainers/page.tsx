@@ -26,13 +26,13 @@ export default function TrainersPage() {
         </div>
       </section>
       <section className="section section-alt" style={{ paddingTop: 90, paddingBottom: 90 }}>
-        <div style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24 }}>
+        <div className="rc-2card" style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24 }}>
           {trainers.map((trainer) => (
-            <article key={trainer.name} className="trainer-card" style={{ display: 'grid', gridTemplateColumns: '220px 1fr', overflow: 'hidden' }}>
-              <div style={{ minHeight: 300, background: trainer.image ? `url(${trainer.image}) center 15% / cover no-repeat` : 'repeating-linear-gradient(135deg, var(--stripe-1), var(--stripe-1) 14px, var(--stripe-2) 14px, var(--stripe-2) 28px)', display: 'grid', placeItems: 'center' }}>
+            <article key={trainer.name} className="trainer-card rc-trainer-split" style={{ display: 'grid', gridTemplateColumns: '220px 1fr', overflow: 'hidden' }}>
+              <div className="trainer-split-media" style={{ minHeight: 300, background: trainer.image ? `url(${trainer.image}) center 15% / cover no-repeat` : 'repeating-linear-gradient(135deg, var(--stripe-1), var(--stripe-1) 14px, var(--stripe-2) 14px, var(--stripe-2) 28px)', display: 'grid', placeItems: 'center' }}>
                 {!trainer.image && <span className="trainer-initials">{trainer.initials}</span>}
               </div>
-              <div style={{ padding: 28 }}>
+              <div className="trainer-split-body" style={{ padding: 28 }}>
                 <div className="info-heading">{trainer.role}</div>
                 <h3 className="trainer-card-body" style={{ fontFamily: 'Anton, sans-serif', fontSize: 28, margin: '6px 0 0', textTransform: 'uppercase' }}>{trainer.name}</h3>
                 <p className="trainer-copy" style={{ marginTop: 12 }}>{trainer.description}</p>
@@ -53,7 +53,7 @@ export default function TrainersPage() {
             How Coaching Works
           </div>
         </div>
-        <div style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+        <div className="rc-3col" style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
           {coachingSteps.map((step) => (
             <div key={step.number} className="zone-card">
               <div style={{ fontFamily: 'Anton, sans-serif', fontSize: 32, color: 'var(--accent)' }}>{step.number}</div>

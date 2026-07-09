@@ -27,7 +27,7 @@ export default function AreaPage() {
         </div>
       </section>
       <section className="section section-alt" style={{ paddingTop: 72, paddingBottom: 72 }}>
-        <div style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 40, alignItems: 'start' }}>
+        <div className="rc-2col" style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 40, alignItems: 'start' }}>
           <div>
             <h2 className="section-title" style={{ fontSize: 'clamp(36px,5vw,52px)' }}>Find IRONHAUS</h2>
             <p className="section-copy" style={{ marginTop: 20 }}>
@@ -60,7 +60,7 @@ export default function AreaPage() {
             Contact
           </div>
         </div>
-        <div style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: 32 }}>
+        <div className="rc-2col" style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: 32 }}>
           <div className="zone-card" style={{ padding: 36 }}>
             <h3 className="zone-title">Drop us a line</h3>
             <p className="zone-copy">We’ll respond within one business day.</p>
@@ -89,7 +89,7 @@ export default function AreaPage() {
             Opening hours
           </div>
         </div>
-        <div style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 20 }}>
+        <div className="rc-3col" style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 20 }}>
           {hours.map((hour) => (
             <div key={hour.label} className="zone-card">
               <h3 className="zone-title">{hour.label}</h3>

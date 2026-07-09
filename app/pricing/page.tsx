@@ -68,7 +68,7 @@ export default function PricingPage() {
             Good To Know
           </div>
         </div>
-        <div style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
+        <div className="rc-2card" style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
           {faqItems.map((item) => (
             <div key={item.question} className="faq-card">
               <h3 className="faq-title">{item.question}</h3>

@@ -49,7 +49,7 @@ export default function EquipmentPage() {
             Six Zones
           </div>
         </div>
-        <div style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+        <div className="rc-3col" style={{ maxWidth: 'var(--container)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
           {equipmentZones.map((zone) => (
             <div key={zone.title} className="zone-card">
               <h3 className="zone-title" style={{ color: 'var(--accent)' }}>{zone.title}</h3>
