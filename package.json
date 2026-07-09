@@ -1,0 +1,27 @@
+{
+  "name": "design_handoff_ironhaus_site",
+  "version": "1.0.0",
+  "description": "IRONHAUS is a local strength & conditioning gym. This package contains the full marketing website design: a dark-themed landing page plus six sub-pages (About, Trainers, Equipment, Pricing, Schedule, Area/Contact). The visual language is bold and industrial — condensed uppercase display type, a near-black canvas, and a single electric-green accent. The task is to build this out as a real, deployable website.",
+  "main": "support.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.3"
+  }
+}

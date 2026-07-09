@@ -1,0 +1,22 @@
+# Dependencies
+/node_modules
+
+# Next.js build output
+/.next
+/out
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Environment / secrets
+.env*.local
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# --- Initial design handoff documents (not shipped) ---
+*.dc.html
+support.js
+README.md
+/uploads
